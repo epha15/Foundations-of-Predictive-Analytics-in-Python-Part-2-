@@ -1,0 +1,8 @@
+# Start of the target is January 1st 2017
+start_target = datetime(year=2017, month=1, day=1)
+
+# Select gifts made before start_target
+gifts_before_2017 = gifts[gifts['date'] < start_target]
+
+# Print the number of donations in gifts_before_2017
+print(gifts_before_2017.count())
