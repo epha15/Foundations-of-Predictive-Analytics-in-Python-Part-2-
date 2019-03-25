@@ -1,0 +1,15 @@
+# Select the relevant predictors and the target
+X = basetable[["amount_2017"]]
+y = basetable[["target"]]
+
+# Build the logistic regression model
+logreg = linear_model.LogisticRegression()
+logreg.fit(X,y)
+
+# Make predictions for X
+predictions = logreg.predict_proba(X)[:,1]
+
+# Calculate and print the AUC value
+auc = roc_auc_score(y, predictions)
+print(round(auc, 2))
+# Result is perfect, but does not make sense
