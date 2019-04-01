@@ -1,0 +1,8 @@
+# Basetable with one column: donor_id
+basetable = pd.DataFrame(population, columns=["donor_id"])
+
+# Add target to the basetable
+basetable["target"] = pd.Series([1 if donor_id in attend_event else 0 for donor_id in basetable["donor_id"]])
+
+# Calculate and print the target incidence
+print(round(basetable["target"].sum() / len(basetable), 2))
