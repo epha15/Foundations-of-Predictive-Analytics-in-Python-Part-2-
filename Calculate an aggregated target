@@ -1,0 +1,11 @@
+# Sum of donations for each donor in gifts_201701
+gifts_summed = gifts_201701.groupby("id")["amount"].sum().reset_index()
+
+# List with targets
+targets = list(gifts_summed["id"][gifts_summed["amount"] > 50])
+
+# Add targets to the basetable
+basetable["target"] = pd.Series([1 if donor_id in targets else 0 for donor_id in basetable["donor_id"]])
+
+# Calculate and print the target incidence
+print(round(basetable["target"].sum() / len(basetable), 2))
