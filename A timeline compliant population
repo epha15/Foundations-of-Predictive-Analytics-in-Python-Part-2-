@@ -1,0 +1,15 @@
+# Gifts made in 2013 or later
+gifts_include = gifts[gifts['date'].dt.year >= 2013]
+
+# Gifts made in 2017 or later
+gifts_exclude = gifts[gifts['date'].dt.year >= 2017]
+
+# Set with ids in gifts_include
+donors_include = set(gifts_include['id'])
+
+# Set with ids in gifts_exclude
+donors_exclude = set(gifts_exclude['id'])
+
+# Population
+population = donors_include.difference(donors_exclude)
+print(len(population))
