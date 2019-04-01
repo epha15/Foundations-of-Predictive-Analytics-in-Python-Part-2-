@@ -1,0 +1,9 @@
+# Add the donor segment to the basetable
+basetable = pd.merge(basetable, segments, on =["donor_id"], how="left")
+
+# Count the number of donors in each segment
+# There is no dataframe.count. It is size!
+basetable.groupby("segment").size()
+
+# Count the number of donors with no segment assigned
+print(basetable["segment"].isnull().sum())
