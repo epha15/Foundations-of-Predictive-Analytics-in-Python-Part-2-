@@ -1,0 +1,13 @@
+# Start and end date of the aggregation period
+start_date = datetime.date(2017, 1, 1)
+end_date = datetime.date(2017, 5, 1)
+
+# Select gifts made in 2017
+gifts_2017 = gifts[(gifts["date"] >= start_date) & (gifts["date"] < end_date)]
+
+# Maximum gift per donor in 2017
+gifts_2017_bydonor = gifts_2017.groupby(["id"])["amount"].max().reset_index()
+gifts_2017_bydonor.columns = ["donor_ID", "max_amount"]
+
+# Add maximum amount to the basetable
+basetable = pd.merge(basetable, gifts_2017_bydonor)
