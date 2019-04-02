@@ -1,0 +1,15 @@
+# Average gift last month for each donor
+average_gift_last_month = gifts_last_month.groupby("id")["amount"].mean().reset_index()
+average_gift_last_month.columns = ["donor_ID", "mean_gift_last_month"]
+
+# Average gift last year for each donor
+average_gift_last_year = gifts_last_year.groupby('id')['amount'].mean().reset_index()
+average_gift_last_year.columns = ["donor_ID", "mean_gift_last_year"]
+
+# Add average gift last month and year to basetable
+basetable = pd.merge(basetable, average_gift_last_month, on="donor_ID", how='left')
+basetable = pd.merge(basetable, average_gift_last_year, on="donor_ID", how='left')
+
+# Calculate ratio of last month's and last year's average
+basetable["ratio_month_year"] = basetable["mean_gift_last_month"] / basetable["mean_gift_last_year"]
+print(basetable.head())
