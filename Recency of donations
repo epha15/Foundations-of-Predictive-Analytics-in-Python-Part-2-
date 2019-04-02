@@ -1,0 +1,12 @@
+# Reference date to calculate the recency
+reference_date = datetime.date(2017, 5, 1)
+
+# Select gifts made before the reference date
+gifts_before_reference = gifts[(gifts["date"] < reference_date)]
+
+# Latest gift per donor in 2017
+last_gift = gifts_before_reference.groupby(["id"])["date"].max().reset_index()
+last_gift["recency"] = reference_date - last_gift["date"]   
+
+# Add recency to the basetable
+basetable = pd.merge(basetable, last_gift[["id", "recency"]], how="left")
