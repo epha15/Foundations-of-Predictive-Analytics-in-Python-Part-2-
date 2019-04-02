@@ -1,0 +1,14 @@
+# Number of gifts in 2016 and 2017 for each donor
+gifts_2016_bydonor = gifts_2016.groupby("id").size().reset_index()
+gifts_2016_bydonor.columns = ["donor_ID", "donations_2016"]
+gifts_2017_bydonor = gifts_2017.groupby("id").size().reset_index()
+gifts_2017_bydonor.columns = ["donor_ID", "donations_2017"]
+
+# Add number of gifts in 2016 and 2017 to the basetable
+basetable = pd.merge(basetable, gifts_2016_bydonor, on="donor_ID", how="left")
+basetable = pd.merge(basetable, gifts_2017_bydonor, on="donor_ID", how="left")
+
+# Calculate the number of gifts in 2017 minus number of gifts in 2016
+basetable.fillna(0)
+basetable["gifts_2017_min_2016"] = basetable["donations_2017"] - basetable["donations_2016"]
+print(basetable.head())
