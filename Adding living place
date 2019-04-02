@@ -1,0 +1,9 @@
+# Reference date
+reference_date = datetime.date(2017, 5, 1)
+
+# Select living place reference date
+living_places_reference_date = living_places[(living_places["end_date"] <= reference_date) & 
+                                            (living_places["start_date"] > '2016/07/01')]
+
+# Add living place to the basetable
+basetable = pd.merge(basetable, living_places_reference_date[["donor_ID", "living_place"]], on="donor_ID")
