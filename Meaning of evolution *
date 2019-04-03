@@ -1,0 +1,8 @@
+# Discretize the variable in 5 bins and add to the basetable
+basetable["donations_2017_min_2016_disc"] = pd.qcut(basetable["donations_2017_min_2016"], 5)
+
+# Construct the predictor insight graph table
+pig_table = create_pig_table(basetable, "target", "donations_2017_min_2016_disc")
+
+# Plot the predictor insight graph
+plot_pig(pig_table, "donations_2017_min_2016_disc")
