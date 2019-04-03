@@ -1,0 +1,8 @@
+# Create dummy indicating missing values
+basetable["no_donations"] = pd.Series([1 if b else 0 for b in basetable["total_donations"].isna()])
+
+# Calculate number of missing values
+number_na = sum(basetable["no_donations"] == 1)
+
+# Calculate percentage of missing values
+print(round(number_na / len(basetable), 2))
