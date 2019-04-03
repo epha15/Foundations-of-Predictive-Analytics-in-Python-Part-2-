@@ -1,0 +1,14 @@
+from scipy.stats.mstats import winsorize
+
+# Check minimum sum of donations
+print(basetable["sum_donations"].max())
+print(basetable["sum_donations"].min())
+
+# Fill out the lower limit
+lower_limit = 0
+
+# Winsorize the variable sum_donations
+basetable["sum_donations_winsorized"] = winsorize(basetable["sum_donations"], limits=[lower_limit, 0.05])
+
+# Check maximum sum of donations after winsorization
+print(basetable["sum_donations_winsorized"].max())
