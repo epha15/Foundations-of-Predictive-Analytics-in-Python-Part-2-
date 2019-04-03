@@ -1,0 +1,15 @@
+# Show the maximum age 
+print(basetable["age"].max())
+
+# Calculate mean and standard deviation of age
+mean_age = basetable["age"].mean()
+std_age = basetable["age"].std()
+
+# Calculate the lower and upper limits
+lower_limit = mean_age - 3 * std_age
+upper_limit = mean_age + 3 * std_age
+
+# Add a variable age_no_outliers to the basetable with outliers replaced
+basetable["age_mod"] = (pd.Series([min(max(a, lower_limit), upper_limit) 
+                             for a in basetable["age"]]))
+print(basetable["age_mod"].max())
