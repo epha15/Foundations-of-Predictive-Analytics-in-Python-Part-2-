@@ -1,0 +1,10 @@
+# Calculate the median of age
+median_age = basetable["age"].median()
+print(median_age)
+
+# Replace missing values by the median
+basetable["age"] = basetable["age"].fillna(median_age)
+
+# Calculate the median of age after replacement
+median_age = basetable["age"].median()
+print(median_age)
