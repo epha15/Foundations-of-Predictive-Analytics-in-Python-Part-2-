@@ -1,0 +1,11 @@
+# Select the evolution variables and fit the model
+X_evolution = basetable[variables_evolution]
+logreg.fit(X_evolution, y)
+
+# Make predictions and calculate the AUC
+predictions_evolution = logreg.predict_proba(X_evolution)[:,1]
+auc_evolution = roc_auc_score(y, predictions_evolution)
+
+# Print the respective AUC values
+print(round(auc_regular, 2))
+print(round(auc_evolution, 2))
