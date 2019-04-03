@@ -1,0 +1,10 @@
+# Create the dummy variable
+dummies_gender = pd.get_dummies(basetable["gender"], drop_first=True)
+print(type(dummies_gender))
+
+# Add the dummy variable to the basetable
+basetable = pd.concat([basetable, dummies_gender], axis=1)
+
+# Delete the original variable from the basetable
+del basetable["gender"]
+print(basetable.head())
