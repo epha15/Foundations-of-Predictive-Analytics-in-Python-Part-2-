@@ -1,0 +1,9 @@
+# Add the log transformation of the variable "donations"
+basetable["donations_log"] = np.log(basetable["donations"])
+
+# Add the square root transformation of the variable "donations"
+basetable["donations_sqrt"] = np.sqrt(basetable["donations"])
+
+# Compare the transformation
+print(basetable)
+print(basetable.describe())
