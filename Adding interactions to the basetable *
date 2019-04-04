@@ -1,0 +1,15 @@
+# Calculate AUC using age only
+print(auc(["age"], basetable))
+
+# Calculate AUC using country_Spain only
+print(auc(["country_Spain"], basetable))
+
+# Calculate AUC using age and country_Spain
+print(auc(["age", "country_Spain"], basetable))
+
+# Add interactions country_Spain x age and country_France x age
+basetable["spain_age"] = basetable["age"] * basetable["country_Spain"]
+basetable["france_age"] = basetable["age"] * basetable["country_France"]
+
+# Calculate AUC using age, country_Spain and interactions
+print(auc(["age", "country_Spain", "spain_age", "france_age"], basetable))
