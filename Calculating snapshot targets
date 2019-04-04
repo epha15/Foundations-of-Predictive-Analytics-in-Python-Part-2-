@@ -1,0 +1,19 @@
+# Sum of donations for each donor
+gifts_summed_january_2017 = gifts_january_2017.groupby("donor_id")["amount"].sum().reset_index()
+gifts_summed_january_2018 = gifts_january_2018.groupby("donor_id")["amount"].sum().reset_index()
+
+# List with targets in January 2017
+targets_january_2017 = list(gifts_summed_january_2017["donor_id"][gifts_summed_january_2017["amount"] >= 500])
+targets_january_2018 = list(gifts_summed_january_2018["donor_id"][gifts_summed_january_2018["amount"] >= 500])
+
+# Add targets to the basetables
+basetable_january_2017["target"] = pd.Series([1 if donor_id in targets_january_2017 else 0 for donor_id in basetable_january_2017["donor_id"]])
+basetable_january_2018["target"] = pd.Series([1 if donor_id in targets_january_2018 else 0 for donor_id in basetable_january_2018["donor_id"]])
+
+# Target incidences
+print(round(sum(basetable_january_2017["target"]) / len(basetable_january_2017), 2))
+print(round(sum(basetable_january_2018["target"]) / len(basetable_january_2018), 2))
+
+print(gifts_summed_january_2017)
+print(targets_january_2017)
+print(basetable_january_2017)
