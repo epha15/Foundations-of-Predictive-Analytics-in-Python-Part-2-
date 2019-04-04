@@ -1,0 +1,15 @@
+# Maximum of donations for each donor in december 2016
+gifts_max_december_2016 = gifts_december_2016.groupby("donor_id")["amount"].max().reset_index()
+gifts_max_december_2016.columns = ["donor_id", "max_amount"]
+
+# Maximum of donations for each donor in december 2017
+gifts_max_december_2017 = gifts_december_2017.groupby("donor_id")["amount"].max().reset_index()
+gifts_max_december_2017.columns = ["donor_id", "max_amount"]
+
+# Add max_amount to the basetables
+basetable_january_2017 = pd.merge(basetable_january_2017, gifts_max_december_2016, on="donor_id", how="left")
+basetable_january_2018 = pd.merge(basetable_january_2018, gifts_max_december_2017, on="donor_id", how="left")
+
+# Show the basetables
+print(basetable_january_2017.head())
+print(basetable_january_2018.head())
