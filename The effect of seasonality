@@ -1,0 +1,22 @@
+#1
+# AUC of model in July:
+predictions = logreg.predict_proba(test_july[["age", "max_amount"]])[:,1]
+auc = roc_auc_score(test_july["target"], predictions)
+print(auc)
+0.5540804074722869
+
+#2
+# AUC of model in September:
+predictions = logreg.predict_proba(test_september[["age", "max_amount"]])[:,1]
+auc = roc_auc_score(test_september["target"], predictions)
+print(auc)
+0.5416164683739391
+
+#3
+# AUC of model in December:
+predictions = logreg.predict_proba(test_december[["age", "max_amount"]])[:,1]
+auc = roc_auc_score(test_december["target"],predictions)
+print(auc)
+ 0.5294167112159428
+ 
+AUC falls due to seasonality as people tend to donate more during the holidays.
