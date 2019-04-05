@@ -1,0 +1,14 @@
+# Start and end date of last month
+start_date = datetime.date(2018, 4, 1)
+end_date = datetime.date(2018, 5, 1)
+
+# Gifts made last month
+gifts_last_month = gifts[(gifts["date"] >= start_date) & (gifts["date"] < end_date)]
+
+# Mean gift made last month
+gifts_last_month_mean = gifts_last_month.groupby("donor_id")["amount"].mean().reset_index()
+gifts_last_month_mean.columns = ["donor_id", "mean_donation_last_month"]
+
+# Add mean_donation_last_month to the basetable
+basetable = pd.merge(basetable, gifts_last_month_mean, on="donor_id", how="left")
+print(basetable.head(10))
