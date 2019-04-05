@@ -1,0 +1,9 @@
+# Reference date
+reference_date = datetime.date(2018, 5, 1)
+
+# Add age to the basetable
+basetable["age"] = (pd.Series([calculate_age(date_of_birth, reference_date)
+                              for date_of_birth in basetable["date_of_birth"]]))
+
+# Calculate mean age
+print(round(basetable["age"].mean()))
