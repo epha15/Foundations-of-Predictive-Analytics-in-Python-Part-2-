@@ -1,0 +1,9 @@
+# Add basetable_january_2017 to basetable_january_2016
+basetable = pd.concat([basetable_january_2016,basetable_january_2017])
+print(basetable.head(5))
+
+# Add basetable_january_2018 to basetable
+basetable = pd.concat([basetable,basetable_january_2018])
+
+# Number of observations in the final basetable
+print(len(basetable))
